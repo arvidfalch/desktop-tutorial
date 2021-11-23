@@ -1,6 +1,6 @@
-#N canvas 437 117 868 613 12;
+#N canvas 351 96 868 613 12;
 #X obj 28 52 adc~;
-#N canvas 380 153 891 645 mixer 1;
+#N canvas 380 153 891 645 mixer 0;
 #X obj 91 370 *~;
 #X obj 91 489 dac~;
 #X obj 92 28 catch~ sound;
@@ -80,7 +80,7 @@
 -1 -1 5940 1;
 #X obj 474 281 vsl 30 100 0 8000 0 0 hfreq HP Hipass -4 -9 0 10 -1
 -257985 -1 0 1;
-#X obj 612 100 vsl 15 128 0 1 0 0 synthvol empty synth_volume 0 -9
-0 10 -262144 -1 -1 0 1;
+#X obj 612 100 vsl 15 128 0 1 0 0 synthvol synthesizerstuff synth_volume
+0 -9 0 10 -262144 -1 -1 0 1;
 #X connect 0 0 7 0;
 #X connect 0 1 8 0;
