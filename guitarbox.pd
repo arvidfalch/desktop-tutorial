@@ -1,0 +1,112 @@
+#N canvas 437 117 868 613 12;
+#X obj 28 52 adc~;
+#N canvas 380 156 891 645 mixer 0;
+#X obj 91 370 *~;
+#X obj 91 489 dac~;
+#X obj 92 28 catch~ sound;
+#X obj 111 243 r mainvol;
+#X obj 338 251 rev3~ 100 90 3000 20;
+#N canvas 328 138 745 494 delay 0;
+#X obj 80 55 inlet~;
+#X obj 80 112 delwrite~ delay 3000;
+#X obj 79 366 outlet~;
+#X obj 79 337 *~;
+#X obj 149 367 send~ feedback;
+#X floatatom 80 242 5 0 0 0 - - -;
+#X obj 80 279 delread~ delay;
+#X obj 176 77 receive~ feedback;
+#X obj 311 294 r delayvol;
+#X obj 80 205 r deltime;
+#X connect 0 0 1 0;
+#X connect 3 0 2 0;
+#X connect 3 0 4 0;
+#X connect 5 0 6 0;
+#X connect 6 0 3 0;
+#X connect 7 0 1 0;
+#X connect 8 0 3 1;
+#X connect 9 0 5 0;
+#X restore 212 274 pd delay;
+#X obj 92 77 lop~;
+#X obj 92 131 hip~;
+#X obj 126 51 r lfreq;
+#X obj 125 105 r hfreq;
+#X obj 392 203 r revsize;
+#N canvas 328 138 745 494 delay2 0;
+#X obj 80 55 inlet~;
+#X obj 79 366 outlet~;
+#X obj 79 337 *~;
+#X floatatom 80 242 5 0 0 0 - - -;
+#X obj 80 205 r deltime2;
+#X obj 176 77 receive~ feedback2;
+#X obj 80 112 delwrite~ delay2 3000;
+#X obj 80 279 delread~ delay2;
+#X obj 311 294 r delayvol2;
+#X obj 149 367 send~ feedback2;
+#X connect 0 0 6 0;
+#X connect 2 0 1 0;
+#X connect 2 0 9 0;
+#X connect 3 0 7 0;
+#X connect 4 0 3 0;
+#X connect 5 0 6 0;
+#X connect 7 0 2 0;
+#X connect 8 0 2 1;
+#X restore 210 241 pd delay2;
+#X floatatom 635 105 5 0 0 0 - - -;
+#X obj 633 67 sigmund~ -maxfreq 5000 pitch;
+#X obj 666 134 mtof;
+#X floatatom 700 163 5 0 0 0 - - -;
+#X obj 732 197 phasor~;
+#X obj 752 253 *~;
+#X obj 807 242 r synthvol;
+#X msg 463 367 \; pd dsp 1 \;;
+#X obj 461 331 loadbang;
+#X connect 0 0 1 0;
+#X connect 0 0 1 1;
+#X connect 2 0 6 0;
+#X connect 2 0 13 0;
+#X connect 3 0 0 1;
+#X connect 4 0 1 0;
+#X connect 4 1 1 1;
+#X connect 5 0 0 0;
+#X connect 6 0 7 0;
+#X connect 7 0 0 0;
+#X connect 7 0 5 0;
+#X connect 7 0 4 0;
+#X connect 7 0 11 0;
+#X connect 8 0 6 1;
+#X connect 9 0 7 1;
+#X connect 10 0 4 2;
+#X connect 11 0 0 0;
+#X connect 12 0 14 0;
+#X connect 13 0 12 0;
+#X connect 14 0 15 0;
+#X connect 15 0 16 0;
+#X connect 16 0 17 0;
+#X connect 17 0 6 0;
+#X connect 18 0 17 1;
+#X connect 20 0 19 0;
+#X restore 27 122 pd mixer;
+#X obj 250 57 cnv 15 350 200 yo ho Main_Controls 20 12 0 14 -257985
+-1 0;
+#X obj 264 100 vsl 25 128 0 1 0 0 mainvol volume Main_Volume 0 -9 0
+10 -86277 -1 -1 0 1;
+#X obj 362 102 vsl 15 128 0 0.75 0 0 delayvol delvol Delay_feedback
+0 -9 0 10 -258113 -1 -1 0 1;
+#X obj 527 101 vsl 15 128 50 100 0 0 revsize reverb Reverb_level 0
+-9 0 10 -260097 -1 -1 0 1;
+#X obj 449 102 vsl 15 128 0 850 0 0 deltime delTime Delay_time 0 -9
+0 10 -258113 -1 -1 0 1;
+#X obj 28 90 throw~ sound;
+#X obj 128 90 throw~ sound;
+#X obj 366 282 vsl 15 128 0 0.75 0 0 delayvol2 delvol Delay_feedback
+0 -9 0 10 -258113 -1 -1 0 1;
+#X obj 453 282 vsl 15 128 0 850 0 0 deltime2 delTime Delay_time 0 -9
+0 10 -258113 -1 -1 0 1;
+#X obj 108 283 vsl 30 100 0 5000 0 0 lfreq LP Lowpass -4 -9 0 10 -257985
+-1 -1 0 1;
+#X obj 167 284 vsl 30 100 0 8000 0 0 hfreq HP Hipass -4 -9 0 10 -1
+-257985 -1 0 1;
+#X obj 560 281 vsl 15 128 0 1 0 0 synthvol empty synth_volume 0 -9
+0 10 -262144 -1 -1 0 1;
+#X connect 0 0 7 0;
+#X connect 0 1 8 0;
